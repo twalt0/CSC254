@@ -1,26 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 get_ipython().system('pip install psycopg2')
-
-
-# In[ ]:
-
-
-
-
-
-# In[1]:
-
-
 import psycopg2
-
-
-# In[2]:
-
 
 class PostgreSQL:
     def __init__(self, host, port, dbname, user, password):
@@ -91,9 +70,6 @@ class PostgreSQL:
         self.conn.close()
 
 
-# In[3]:
-
-
 classes_table = "classes"
 students_table = "students"
 
@@ -111,16 +87,11 @@ classes_info_dict = {'student_id': [700000001, 700000002, 700000003, 700000001, 
 students_info_dict = {'student_id': [700000001, 700000002, 700000003], 
                      "name": ["Thomas Walter", "John Adams", "Abraham Lincoln"]}
 
-
-# In[4]:
-
+## Sterilize tables from DB
 
 postgres = PostgreSQL(host="localhost", port=5432, dbname="postgres", user="postgres", password="Womster*0808*")
 postgres.delete_table(classes_table)
 postgres.delete_table(students_table)
-
-
-# In[5]:
 
 
 ## First we create a table of student ids and their names, then check to see that the data is posted
@@ -134,9 +105,6 @@ data = postgres.pull_data(students_table)
 print(data)
 
 
-# In[6]:
-
-
 ## Next we create a table of student ids and corresponding class grades, then we check to see data is posted
 
 postgres.create_table(classes_table, classes_cols_dict)
@@ -147,9 +115,6 @@ data = postgres.pull_data(classes_table)
 print(data)
 
 
-# In[7]:
-
-
 ## Lastly we are joining the tables, pulling the average of the classes table
 
 data = postgres.join_tables(students_table, classes_table, "student_id", True)
@@ -157,14 +122,5 @@ print(data)
 postgres.close_connection()
 
 
-# In[8]:
-
-
 print(data[0])
-
-
-# In[ ]:
-
-
-
 
