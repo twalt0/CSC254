@@ -1,4 +1,3 @@
-get_ipython().system('pip install psycopg2')
 import psycopg2
 
 class PostgreSQL:
@@ -69,7 +68,6 @@ class PostgreSQL:
         self.cur.close()
         self.conn.close()
 
-
 classes_table = "classes"
 students_table = "students"
 
@@ -87,7 +85,6 @@ classes_info_dict = {'student_id': [700000001, 700000002, 700000003, 700000001, 
 students_info_dict = {'student_id': [700000001, 700000002, 700000003], 
                      "name": ["Thomas Walter", "John Adams", "Abraham Lincoln"]}
 
-## Sterilize tables from DB
 
 postgres = PostgreSQL(host="localhost", port=5432, dbname="postgres", user="postgres", password="Womster*0808*")
 postgres.delete_table(classes_table)
@@ -96,10 +93,13 @@ postgres.delete_table(students_table)
 
 ## First we create a table of student ids and their names, then check to see that the data is posted
 
+print("Constructing students table...")
 postgres = PostgreSQL(host="localhost", port=5432, dbname="postgres", user="postgres", password="Womster*0808*")
 postgres.create_table(students_table, students_cols_dict)
+print("\nReading data from students table before adding students:")
 data = postgres.pull_data(students_table)
 print(data)
+print("\nReading data from students table after adding students:")
 postgres.push_data(students_table, students_info_dict)
 data = postgres.pull_data(students_table)
 print(data)
@@ -107,20 +107,25 @@ print(data)
 
 ## Next we create a table of student ids and corresponding class grades, then we check to see data is posted
 
+print("\n\nConstructing classes table...")
 postgres.create_table(classes_table, classes_cols_dict)
+print("\nReading data from classes table before adding classes")
 data = postgres.pull_data(classes_table)
 print(data)
+print("\nReading data from classes table after adding classes:")
 postgres.push_data(classes_table, classes_info_dict)
 data = postgres.pull_data(classes_table)
 print(data)
 
 
 ## Lastly we are joining the tables, pulling the average of the classes table
-
+print(f"\n\nReading data from both tables after joining and obtaining averages:")
 data = postgres.join_tables(students_table, classes_table, "student_id", True)
-print(data)
+print(f"{data}\n")
 postgres.close_connection()
 
 
-print(data[0])
+print("\nReturning each students name and gpa:")
+for datum in data:
+    print(f"Name: {datum[1]} (GPA [100 scale]: {'{:.2f}'.format(datum[2])}")
 
