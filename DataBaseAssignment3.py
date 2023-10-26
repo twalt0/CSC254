@@ -319,3 +319,38 @@ for table_name, cols_dict in store_cols_dict.items():
 # ---------------------------------------------------------------------------------------------------
 
 
+"""
+-- Table: public.purchases
+
+-- DROP TABLE IF EXISTS public.purchases;
+
+CREATE TABLE IF NOT EXISTS public.purchases
+(
+    id integer NOT NULL DEFAULT nextval('purchases_id_seq'::regclass),
+    transaction_id integer NOT NULL DEFAULT nextval('purchases_transaction_id_seq'::regclass),
+    item_id integer NOT NULL DEFAULT nextval('purchases_item_id_seq'::regclass),
+    quantity integer
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.purchases
+    OWNER to postgres;
+-- Index: idx_purchases_item_id
+
+-- DROP INDEX IF EXISTS public.idx_purchases_item_id;
+
+CREATE INDEX IF NOT EXISTS idx_purchases_item_id
+    ON public.purchases USING btree
+    (item_id ASC NULLS LAST)
+    TABLESPACE pg_default;
+-- Index: idx_purchases_transaction_id
+
+-- DROP INDEX IF EXISTS public.idx_purchases_transaction_id;
+
+CREATE INDEX IF NOT EXISTS idx_purchases_transaction_id
+    ON public.purchases USING btree
+    (transaction_id ASC NULLS LAST)
+    TABLESPACE pg_default;
+"""
+
