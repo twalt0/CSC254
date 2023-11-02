@@ -265,7 +265,7 @@ store_info_dict = {
 
 # ------------------------- INITIALIZE POSTGRESQL CONNECTION -----------------------------------------------
 
-postgres = PostgreSQL(host="localhost", port=5432, dbname="postgres", user="postgres", password="Womster*0808*")
+postgres = PostgreSQL(host="localhost", port=5432, dbname="postgres", user="postgres", password="")
 
 # ----------------------------------------------------------------------------------------------------------
 
