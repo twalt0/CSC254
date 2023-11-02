@@ -86,7 +86,7 @@ students_info_dict = {'student_id': [700000001, 700000002, 700000003],
                      "name": ["Thomas Walter", "John Adams", "Abraham Lincoln"]}
 
 
-postgres = PostgreSQL(host="localhost", port=5432, dbname="postgres", user="postgres", password="Womster*0808*")
+postgres = PostgreSQL(host="localhost", port=5432, dbname="postgres", user="postgres", password="")
 postgres.delete_table(classes_table)
 postgres.delete_table(students_table)
 
@@ -94,7 +94,7 @@ postgres.delete_table(students_table)
 ## First we create a table of student ids and their names, then check to see that the data is posted
 
 print("Constructing students table...")
-postgres = PostgreSQL(host="localhost", port=5432, dbname="postgres", user="postgres", password="Womster*0808*")
+postgres = PostgreSQL(host="localhost", port=5432, dbname="postgres", user="postgres", password="")
 postgres.create_table(students_table, students_cols_dict)
 print("\nReading data from students table before adding students:")
 data = postgres.pull_data(students_table)
