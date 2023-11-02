@@ -144,7 +144,7 @@ To represent this, I am going to create a loop using random selection to grab it
 """
 
 # ------------------------------ Initializing Connection & Development Constants -------------------------------------
-postgres = PostgreSQL(host="localhost", port=5432, dbname="postgres", user="postgres", password="Womster*0808*")
+postgres = PostgreSQL(host="localhost", port=5432, dbname="postgres", user="postgres", password="")
 #const_time = datetime.datetime.now()
 #end_time = const_time + datetime.timedelta(minutes=1)
 pay_method = ["Credit", "Debit", "Cash"]
