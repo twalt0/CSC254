@@ -193,8 +193,12 @@ To represent this, I am going to create a loop using random selection to grab it
 
 # ------------------------------ Initializing Connection & Development Constants -------------------------------------
 postgres = PostgreSQL(host="localhost", port=5432, dbname="postgres", user="postgres", password="Womster*0808*")
+
+"""
 const_time = datetime.datetime.now()
 end_time = const_time + datetime.timedelta(minutes=1)
+"""
+
 pay_method = ["Credit", "Debit", "Cash"]
 first_names = ["Thomas", "Micah", "Josh", "Joan", "Cat", "Bill", "Ted"]
 last_names = ["Walter", "Weatherly", "Aperture", "Bishop", "Hope"]
@@ -212,7 +216,7 @@ if "stock" not in postgres.get_column_names("items"):
 
 
 # ------------------------------------ Start Loop to Create Data ------------------------------------------------------
-while end_time > const_time:
+while True:
     # ------------------------------------ Local Loop Constants -----------------------------------------------------
     user_ids = postgres.value_array("store_users", "id")
     item_ids = [item[0] for item in postgres.execute_return("SELECT id FROM items WHERE stock > 0")]
